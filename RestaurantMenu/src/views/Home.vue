@@ -21,11 +21,18 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import store from '../store';
+import axiosClient from '../axiosClient.js';
 
-const meals = computed(() => store.state.meals);
 const letters = 'ABCDEFGHIJKLMNOPQRTUVWXYZ'.split('');
+const ingredients = ref([]);
+
+onMounted(async () => {
+  const response = await axiosClient.get('/list.php?i=list');
+  console.log(response.data);
+  ingredients.value = response.data;
+});
 </script>
 
 <style lang="scss" scoped></style>
