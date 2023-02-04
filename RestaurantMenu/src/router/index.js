@@ -28,6 +28,7 @@ const routes = [
         name: 'byLetter',
         component: MealsByLetter,
       },
+
       {
         path: '/ingredients',
         name: 'ingredients',

@@ -23,26 +23,30 @@
   </div>
 </template>
 
-import { computed } from "@vue/reactivity"; import { onMounted, ref } from "vue"; import { useRouter
-} from "vue-router"; import axiosClient from "../axiosClient"; import store from "../store";
+<script setup>
+import { computed } from '@vue/reactivity';
+import { onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
+import axiosClient from '../axiosClient';
+import store from '../store';
 const router = useRouter();
-const keyword = ref("");
+const keyword = ref('');
 const ingredients = ref([]);
 const computedIngredients = computed(() => {
   if (!computedIngredients) return ingredients;
-  return ingredients.value.filter((i) =>
-    i.strIngredient.toLowerCase().includes(keyword.value.toLowerCase())
+  return ingredients.value.filter(i =>
+    i.strIngredient.toLowerCase().includes(keyword.value.toLowerCase()),
   );
 });
 function openIngredient(ingredient) {
-  store.commit('setIngredient', ingredient)
+  store.commit('setIngredient', ingredient);
   router.push({
-    name: "byIngredient",
+    name: 'byIngredient',
     params: { ingredient: ingredient.strIngredient },
   });
 }
 onMounted(() => {
-  axiosClient.get("list.php?i=list").then(({ data }) => {
+  axiosClient.get('list.php?i=list').then(({ data }) => {
     ingredients.value = data.meals;
   });
 });
