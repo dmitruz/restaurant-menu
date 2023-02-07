@@ -29,6 +29,7 @@ import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import axiosClient from '../axiosClient';
 import store from '../store';
+
 const router = useRouter();
 const keyword = ref('');
 const ingredients = ref([]);
